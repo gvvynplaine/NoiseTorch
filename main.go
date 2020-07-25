@@ -2,12 +2,14 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"image"
 	"io"
 	"io/ioutil"
 	"log"
 	"os"
 	"syscall"
+	"time"
 
 	"github.com/aarzilli/nucular/font"
 
@@ -43,8 +45,8 @@ func main() {
 		}
 		os.Exit(0)
 	}
-
-	f, err := os.OpenFile("/tmp/noisetorch.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
+	date := time.Now().Format("20060102030405")
+	f, err := os.OpenFile(fmt.Sprintf("/tmp/noisetorch-%s.log", date), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		log.Fatalf("error opening file: %v\n", err)
 	}
